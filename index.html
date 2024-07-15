@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Test me</title>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+        integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+</head>
+<style>
+    input,
+    textarea {
+        background-color: rgba(0, 0, 0, 0);
+        border: solid 1px #4b4a52;
+        border-radius: 4px;
+        box-sizing: border-box;
+        color: #15141a;
+        border-radius: 4px;
+        font-family: Segoe UI;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: normal;
+        min-height: 32px;
+        min-width: 94.5px;
+        padding: 0 22.5px;
+        margin: 3px 5px
+    }
+
+    input:focus,
+    textarea:focus {
+        border: #0250bb solid .1px
+    }
+
+    button {
+        background-color: #0250bb;
+        border: #0250bb solid;
+        color: #fbfbfe;
+        border-radius: 4px;
+        font-family: Segoe UI;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: normal;
+        min-height: 32px;
+        min-width: 94.5px;
+        padding: 0 22.5px;
+        margin: 3px 5px
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        overflow-wrap: break-word;
+        padding-left: 32px;
+        padding-right: 32px;
+        text-rendering: optimizelegibility
+    }
+
+    .pure-form-aligned .pure-control-group label {
+        text-align: start;
+        margin-bottom: 5px
+    }
+
+    .pure-form-aligned .pure-control-group .pure-form-message-inline {
+        margin-bottom: 15px
+    }
+
+    .form-action-waiting {
+        background-color: #002f72;
+        border: #002f72 solid
+    }
+
+    .form-action-success {
+        background-color: #02bb65;
+        border: #02bb65 solid
+    }
+
+    .form-action-error {
+        background-color: #bb2702;
+        border: #bb2702 solid
+    }
+</style>
+
+<body>
+    <div class="content">
+        <form class="pure-form pure-form-aligned" action="https://fcm.googleapis.com/fcm/send" method="post">
+            <h1><img loading="lazy" height="92px" src="https://muathye.com/images/muathye.png">
+            </h1>
+            <h1>إرسال إشعار للتطبيق</h1>
+            <fieldset>
+                <div class="pure-control-group"><label for="form-title">عنوان الإشعار</label> <input type="text"
+                        name="title" id="form-title" class="pure-input-1" placeholder="عروض الموسم 🤩"
+                        value="عروض الموسم 🤩" required></div>
+                <div class="pure-control-group"><label for="form-body">نص الإشعار</label> <textarea type="text"
+                        name="body" id="form-body" class="pure-input-1"
+                        placeholder="عروضنا الموسمية لازالت مستمرة سارع قبل نفاد الكمية."
+                        required>عروضنا الموسمية لازالت مستمرة سارع قبل نفاد الكمية.</textarea></div>
+                <div class="pure-control-group"><label for="form-image">صورة الإشعار</label> <input type="text"
+                        name="image" id="form-image" class="pure-input-1" value="https://muathye.com/images/muathye.png"
+                        placeholder="https://avatars.githubusercontent.com/u/71807824?s=64&v=4"> <span
+                        class="pure-form-message-inline">ضع رابط الصورة هنا</span></div>
+                <div class="pure-control-group"><button type="button" id="form-action" class="pure-input-1"
+                        onclick="sendFCM()">إرسال</button></div>
+            </fieldset>
+        </form>
+    </div>
+    <script acync="" src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        function sendFCM() {
+            document.getElementById("form-action").setAttribute("class", "pure-input-1 form-action-waiting"),
+                document.getElementById("form-action").disabled = !0, axios({
+                    method: "POST", url: "https://fcm.googleapis.com/fcm/send", headers:
+                    {
+                        "Content-Type": "application/json",
+                        Authorization: "ya29.c.c0ASRK0GZRnfJw_EJiHzy4BVJa1OfWZzzq7J1mFX0quGe6NBPBClKxMRJx3nEgBQIFKbrYivx6pa0lNIMrPaaJIcMGQSSNuu_hBVMsXqYH8IzS3i2HJD6s1anSNgzlBj2SAATff5pBrj-zYUAiU0gmj-LY4rNjfKyjj4TpdAYusEMW0Q03QlZvKvedapbyQENBB_Ucunm1lpbsvf6sz0gS2E70mTnaF9Z6Ty3x7fUM3o9Ktj7PjUEU2sgoisofN0KrjGcK31bTn8i1ej5Vbpq6w_heQ0K5t7XfEBOLvMMGkQ8SeBl3a70JxNlj7_PJudc7ot86mtxpTFyioptqX96nzTMgb0QRn2snmCf21MLDNO_x_FbxgOyYfEQzT385AQ9iWJQ9kWYR3hodVu2XWZgqmaRioIQirzW18bRaRn6F7BW4x_ZRpogZB1w3f5gd3WscbzS2Jzq3cUM2hkFvBggywBVrBe-J0y77kgcWJufkeSWSwd1FiY6YW_S3BshjWSrM62_iUibc_fvi4c0Fk0lXyzIjrq8zrQ2VW6_0dk_ddi-j9RizQdrtOS9sY1pb23g6I1m0ZtxOvaeMekS68UYbrpiqXJlOlxdhckcuZeFunbxcx84OrknikV3F8cmgQBnqO_paWZyjS8qbXZtlo5BItX3yiubOZ4Jcfb9mVf2zpty8Vs2bqUezyndJ675iIv7Fc4IgjX6g1RcfqpSt_0fYeWisfbhvVx_06h1Xcx48lqBokbxjFlXqx7bVO5sXU9RFkg14BbYsndedold0shwanOUaQX-h516Sed1Sijo2yZ-p9ver9gZt_ROF61SB6f3lmInqY9MnjvzwksvneWaUf9U6ucsxXSteOY9X5jxbnybXMulSp6MUynx7cev_xlgeU4Wx-ghfWmc1V5p7lduZ_cn_ww5hpnw1B6aWe6jtFon3FsM5WRuY99ywhJgVvncZa7-k4z5O3v4S9ztgmq3qZ590xdIkaaZkUfQQFztagBmf_nj8y-5n--3"
+                    }, data: {
+                        to: "/topics/public_msg",
+                        notification: {
+                            title: document.getElementById("form-title").value,
+                            body: document.getElementById("form-body").value,
+                            image: document.getElementById("form-image").value
+                        }
+                    }
+                }).then(function (t) {
+                    document.getElementById("form-action").setAttribute("class", "pure-input-1 form-action-success"),
+                        document.getElementById("form-action").disabled = !1
+                }).catch(function (t) {
+                    document.getElementById("form-action").setAttribute("class", "pure-input-1 form-action-error"),
+                        document.getElementById("form-action").disabled = !1
+                })
+        }
+    </script>
+</body>
+
+</html>
